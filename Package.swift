@@ -1,23 +1,33 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "ExtendedDatePicker",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "ExtendedDatePicker",
-            targets: ["ExtendedDatePicker"]),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "ExtendedDatePicker"),
-        .testTarget(
-            name: "ExtendedDatePickerTests",
-            dependencies: ["ExtendedDatePicker"]),
-    ]
+  name: "ExtendedDatePicker",
+  platforms: [.iOS(.v14), .macCatalyst(.v14), .macOS(.v11)],
+  products: [
+    .library(
+      name: "ExtendedDatePicker",
+      type: .static,
+      targets: ["ExtendedDatePicker"]
+    ),
+    .library(
+      name: "ExtendedDatePicker-Dynamic",
+      type: .dynamic,
+      targets: ["ExtendedDatePicker"]
+    )
+  ],
+  dependencies: [],
+  targets: [
+    .target(
+      name: "ExtendedDatePicker",
+      dependencies: [],
+      path: "Sources"
+    ),
+    .testTarget(
+      name: "ExtendedDatePickerTests",
+      dependencies: ["ExtendedDatePicker"],
+      path: "Tests"
+    ),
+  ]
 )
