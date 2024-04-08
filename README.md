@@ -31,7 +31,7 @@ In addition, some UI elements (such as back and forward arrows) can be customize
 The client must provide at least `selectedDate`, `dateRange`, `mode`  parameters. `selectedDate` is the state object that keeps track of currently selected date by user. 
 
 Info about date modes:
-- `week`:  If the user has selected 1-6 February 2024, for example, `selectedDate` would be `1-2-2024`. 
+- `week`:  If the user has selected 2-8 February 2024, for example, `selectedDate` would be `2-2-2024`. 
 - `monthYear`: If the user has selected February 2024, for example, `selectedDate` would be `x-2-2024`. No guarantees are made about `x`. 
 - `year`:  If the user has selected 2024, for example, `selectedDate` would be `x-y-2024`. No guarantees are made about `x` or `y`.
 
