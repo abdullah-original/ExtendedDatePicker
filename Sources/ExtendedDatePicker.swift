@@ -67,6 +67,10 @@ private extension ExtendedDatePicker {
         .contentShape(Circle())
       }
       
+      if options.spaceOutSymbols {
+        Spacer()
+      }
+      
       Group {
         if let header = options.header {
           header(model.selectedDate)
@@ -77,6 +81,10 @@ private extension ExtendedDatePicker {
       .contentShape(Rectangle())
       .onTapGesture {
         isPickerPresented = true
+      }
+      
+      if options.spaceOutSymbols {
+        Spacer()
       }
       
       if shouldShowButtons {
