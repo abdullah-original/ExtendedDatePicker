@@ -2,9 +2,9 @@
 
 `DatePicker` from SwiftUI only has two modes (`date`, and `hourAndMinute`) which for many cases is not sufficient. Often you need to switch between even more modes. ExtendedDatePicker solves this problem by providing extra modes that SwiftUI doesn't provide out of the box.
 
-| Time | Date |  DateTime | Week |  MonthYear| Year| 
+| Hour | Date |  DateTime | Week |  MonthYear| Year| 
 | - | - | - | - | - | - |
-| ![time](./images/time.png) | ![date](./images/date.png)  | ![dateTime](./images/dateTime.png) | ![week](./images/week.png) | ![monthYear](./images/monthYear.png) | ![year](./images/year.png)
+| ![Hour](./images/hour.png) | ![date](./images/date.png)  | ![dateTime](./images/dateTime.png) | ![week](./images/week.png) | ![monthYear](./images/monthYear.png) | ![year](./images/year.png)
 
 ## Installation
 `ExtendedDatePicker` is available to be installed in your app via [Swift Package Manager](https://www.swift.org/documentation/package-manager/) using the git url `https://github.com/abdullah-original/ExtendedDatePicker.git`.
