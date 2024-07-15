@@ -21,28 +21,40 @@ public class ExtendedDatePickerFormatter {
     self.dateIntervalFormatter.calendar = calendar
     self.dateIntervalFormatter.locale = calendar.locale
     self.dateIntervalFormatter.timeZone = calendar.timeZone
-    self.dateIntervalFormatter.timeStyle = .none
-    self.dateIntervalFormatter.dateStyle = .medium
   }
-  
+
   func format(from date: Date, mode: DateMode) -> String {
-    dateFormatter.dateFormat = switch mode {
-    case .hour:
-      "HH:mm"
-    case .date:
-      "d MMMM yyyy"
-    case .dateTime:
-      "d MMMM yyyy, HH:mm"
-    case .monthYear:
-      "MMMM yyyy"
-    case .year:
-      "yyyy"
-    case .week:
-      ""
+    if mode == .week, let endOfWeek = calendar.date(byAdding: .day, value: 6, to: date) {
+      self.dateIntervalFormatter.timeStyle = .none
+      self.dateIntervalFormatter.dateStyle = .medium
+      return dateIntervalFormatter.string(from: date, to: endOfWeek)
+    }
+
+    if [.monthYear, .year].contains(mode) {
+      dateFormatter.dateFormat = switch mode {
+      case .monthYear:
+        "MMMM yyyy"
+      case .year:
+        "yyyy"
+      default:
+        ""
+      }
+
+      return dateFormatter.string(from: date)
     }
     
-    if mode == .week, let endOfWeek = calendar.date(byAdding: .day, value: 6, to: date) {
-      return dateIntervalFormatter.string(from: date, to: endOfWeek)
+    dateFormatter.dateStyle = switch mode {
+    case .date, .dateTime:
+        .long
+    default:
+        .none
+    }
+
+    dateFormatter.timeStyle = switch mode {
+    case .hour, .dateTime:
+        .short
+    default:
+        .none
     }
 
     return dateFormatter.string(from: date)
