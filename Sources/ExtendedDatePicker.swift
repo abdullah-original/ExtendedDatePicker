@@ -160,12 +160,8 @@ fileprivate struct ExtendedDatePickerPreview: View {
   }
 }
 
-
+@available(iOS 17, macOS 14, macCatalyst 17, *)
 #Preview {
-  if #available(iOS 17, *) {
-    ExtendedDatePickerPreview()
-  } else {
-    EmptyView()
-  }
+  ExtendedDatePickerPreview()
 }
 #endif
