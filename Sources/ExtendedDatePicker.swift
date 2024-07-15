@@ -24,7 +24,7 @@ public struct ExtendedDatePicker: View {
   }
   
   public var body: some View {
-    if options.shouldUseWheelStyleDatePicker(), #available(iOS 16.4, macCatalyst 16.4, macOS 13.3, *) {
+    if options.shouldUseWheelStyleDatePicker, #available(iOS 16.4, macCatalyst 16.4, macOS 13.3, *) {
       header()
         .popover(isPresented: $isPickerPresented) {
           datePicker()

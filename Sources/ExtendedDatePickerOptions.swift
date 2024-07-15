@@ -9,7 +9,7 @@ public struct ExtendedDatePickerOptions {
   let header: ((Date) -> AnyView)?
   // Provide .infinity to push symbols to the edge
   let spacing: CGFloat?
-  let shouldUseWheelStyleDatePicker: () -> Bool
+  let shouldUseWheelStyleDatePicker: Bool
   
   public init(
     backSymbol: Image = .init(systemName: "chevron.left"),
@@ -22,12 +22,6 @@ public struct ExtendedDatePickerOptions {
     self.forwardSymbol = forwardSymbol
     self.header = header
     self.spacing = spacing
-    self.shouldUseWheelStyleDatePicker = {
-      if #available(iOS 16.4, macCatalyst 16.4, macOS 13.3, *), shouldUseWheelStyleDatePicker {
-        return true
-      }
-
-      return false
-    }
+    self.shouldUseWheelStyleDatePicker = shouldUseWheelStyleDatePicker
   }
 }
