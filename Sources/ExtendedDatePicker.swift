@@ -56,7 +56,7 @@ private extension ExtendedDatePicker {
   }
   
   func header() -> some View {
-    HStack(spacing: options.spacing) {
+    HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
       if shouldShowButtons {
         Button {
           model.didPressBack()
@@ -67,7 +67,7 @@ private extension ExtendedDatePicker {
         .contentShape(Circle())
       }
       
-      if options.spaceOutSymbols {
+      if options.spacing == .infinity {
         Spacer()
       }
       
@@ -83,7 +83,7 @@ private extension ExtendedDatePicker {
         isPickerPresented = true
       }
       
-      if options.spaceOutSymbols {
+      if options.spacing == .infinity {
         Spacer()
       }
       
@@ -135,7 +135,7 @@ fileprivate struct ExtendedDatePickerPreview: View {
   let calendar: Calendar = {
     var tempCal = Calendar.current
     tempCal.timeZone = .init(abbreviation: "CET")!
-    tempCal.locale = .init(identifier: "en-GB")
+    tempCal.locale = .init(identifier: "ar-UAE")
     return tempCal
   }()
   
