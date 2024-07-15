@@ -12,7 +12,7 @@ final class ExtendedDatePickerModelTests: XCTestCase {
   override func setUp() {
     super.setUp()
     calendar = .current
-    calendar.locale = .init(identifier: "en-US")
+    calendar.locale = .init(identifier: "en-GB")
     
     selectedDate = Date()
   }
@@ -126,27 +126,7 @@ final class ExtendedDatePickerModelTests: XCTestCase {
     XCTAssertEqual(result.sorted(by: <).last?.value, "May 2024")
   }
   
-  func testWeekOptions_whenDateRangeIs14March2024To5May2024_shouldReturn8Weeks() {
-    let input = ClosedRange(
-      uncheckedBounds: (
-        lower: DateComponents(calendar: calendar, year: 2024, month: 3, day: 14).date!,
-        upper: DateComponents(calendar: calendar, year: 2024, month: 5, day: 5).date!
-      )
-    )
-    
-    sut = .init(
-      selectedDate: .init(get: { self.selectedDate }, set: { self.selectedDate = $0 }),
-      dateRange: input,
-      calendar: calendar,
-      mode: .week
-    )
-    
-    let result = sut.weekOptions()
-    
-    XCTAssertEqual(result.count, 8)
-  }
-  
-  func testWeekOptions_whenDateRangeIs14March2024To2May2024_shouldReturn7Weeks() {
+  func testWeekOptions_whenDateRangeIs14March2024To2May2024_shouldReturn8Weeks() {
     let input = ClosedRange(
       uncheckedBounds: (
         lower: DateComponents(calendar: calendar, year: 2024, month: 3, day: 14).date!,
@@ -163,14 +143,14 @@ final class ExtendedDatePickerModelTests: XCTestCase {
     
     let result = sut.weekOptions()
     
-    XCTAssertEqual(result.count, 7)
+    XCTAssertEqual(result.count, 8)
   }
   
-  func testWeekOptions_whenDateRangeIs14March2024To1May2024_shouldReturn7Weeks() {
+  func testWeekOptions_whenDateRangeIs11March2024To5May2024_shouldReturn8Weeks() {
     let input = ClosedRange(
       uncheckedBounds: (
-        lower: DateComponents(calendar: calendar, year: 2024, month: 3, day: 14).date!,
-        upper: DateComponents(calendar: calendar, year: 2024, month: 5, day: 1).date!
+        lower: DateComponents(calendar: calendar, year: 2024, month: 3, day: 17).date!,
+        upper: DateComponents(calendar: calendar, year: 2024, month: 5, day: 5).date!
       )
     )
     
@@ -183,7 +163,27 @@ final class ExtendedDatePickerModelTests: XCTestCase {
     
     let result = sut.weekOptions()
     
-    XCTAssertEqual(result.count, 7)
+    XCTAssertEqual(result.count, 8)
+  }
+  
+  func testWeekOptions_whenDateRangeIs14March2024To1May2024_shouldReturn7Weeks() {
+    let input = ClosedRange(
+      uncheckedBounds: (
+        lower: DateComponents(calendar: calendar, year: 2024, month: 3, day: 14).date!,
+        upper: DateComponents(calendar: calendar, year: 2024, month: 4, day: 29).date!
+      )
+    )
+    
+    sut = .init(
+      selectedDate: .init(get: { self.selectedDate }, set: { self.selectedDate = $0 }),
+      dateRange: input,
+      calendar: calendar,
+      mode: .week
+    )
+    
+    let result = sut.weekOptions()
+    
+    XCTAssertEqual(result.count, 8)
   }
 
   func testHourOptions_whenDateRangeIs2February20241700To1February20242130_shouldReturn5Hours() {

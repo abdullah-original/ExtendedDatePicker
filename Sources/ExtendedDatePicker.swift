@@ -129,36 +129,43 @@ private extension ExtendedDatePicker {
 
 // MARK: - Preview
 
+@available(iOS 17, macOS 14, macCatalyst 17, *)
 fileprivate struct ExtendedDatePickerPreview: View {
   @State var selectedDate = Date()
   
   let calendar: Calendar = {
     var tempCal = Calendar.current
     tempCal.timeZone = .init(abbreviation: "CET")!
-    tempCal.locale = .init(identifier: "ar-UAE")
+    tempCal.locale = .init(identifier: "en-GB")
     return tempCal
   }()
   
-  let range = Date()...(Date().addingTimeInterval(60*60*24*79))
+  let range = Date()...(Calendar.current.date(
+    byAdding: .day,
+    value: 22,
+    to: .now
+  ) ?? .now)
   
 
   var body: some View {
-    if #available(iOS 17, macOS 14, macCatalyst 17, *) {
-      ExtendedDatePicker(
-        selectedDate: $selectedDate,
-        dateRange: range,
-        mode: .monthYear,
-        calendar: self.calendar
-      )
-      .onChange(of: selectedDate, initial: true) {
-        print(selectedDate)
-      }
+    ExtendedDatePicker(
+      selectedDate: $selectedDate,
+      dateRange: range,
+      mode: .week,
+      calendar: self.calendar
+    )
+    .onChange(of: selectedDate, initial: true) {
+      print(selectedDate)
     }
   }
 }
 
 
 #Preview {
-  ExtendedDatePickerPreview()
+  if #available(iOS 17, *) {
+    ExtendedDatePickerPreview()
+  } else {
+    EmptyView()
+  }
 }
 #endif

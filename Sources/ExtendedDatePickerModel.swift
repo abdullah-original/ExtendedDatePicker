@@ -76,9 +76,18 @@ final class ExtendedDatePickerModel: ObservableObject {
   func weekOptions() -> [Date: String] {
     var result = [Date: String]()
     
-    var startOfWeek = dateRange.lowerBound
+    let dateComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: dateRange.lowerBound)
+    
+    guard var startOfWeek = calendar.date(
+      from: .init(
+        weekOfYear: dateComponents.weekOfYear,
+        yearForWeekOfYear: dateComponents.yearForWeekOfYear
+      )
+    ) else {
+      return [:]
+    }
 
-    while calendar.compare(startOfWeek, to: dateRange.upperBound, toGranularity: .day) == .orderedAscending {
+    while calendar.compare(startOfWeek, to: dateRange.upperBound, toGranularity: .day) != .orderedDescending {
       result[startOfWeek] = dateFormatter.format(from: startOfWeek, mode: .week)
       startOfWeek = getNext(component: .weekOfYear, for: startOfWeek, forward: true)
     }
