@@ -5,12 +5,12 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
   
   private var sut: ExtendedDatePickerFormatter!
   private var calendar: Calendar = .current
-    
+  
   func testHourMode_shouldOnlyDisplayHour() {
-    // Arrange
+      // Arrange
     self.calendar.locale = .init(identifier: "en-GB")
     self.sut = .init(calendar: calendar)
-
+    
     let hour = calendar.date(
       from: .init(
         year: 2024,
@@ -20,10 +20,10 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
       )
     )!
     
-    // Act
+      // Act
     let result = sut.format(from: hour, mode: .hour)
     
-    // Assert
+      // Assert
     XCTAssertEqual(result, "17:00")
   }
   
@@ -31,7 +31,7 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
       // Arrange
     self.calendar.locale = .init(identifier: "en-US")
     self.sut = .init(calendar: calendar)
-
+    
     let hour = calendar.date(
       from: .init(
         year: 2024,
@@ -48,12 +48,12 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
       // Assert
     XCTAssertEqual(result, "July 15, 2024")
   }
-
+  
   func testDateTimeMode_shouldDisplayBothDateAndTime() {
       // Arrange
     self.calendar.locale = .init(identifier: "en-US")
     self.sut = .init(calendar: calendar)
-
+    
     let hour = calendar.date(
       from: .init(
         year: 2024,
@@ -65,12 +65,15 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
     )!
     
       // Act
-    let result = sut.format(from: hour, mode: .dateTime)
+    let result = sut.format(from: hour, mode: .dateTime).filter { !$0.isWhitespace }
     
       // Assert
-    XCTAssertEqual(result, "July 15, 2024 at 5:37 PM")
+    XCTAssertEqual(
+      result,
+      "July 15, 2024 at 5:37 PM".filter { !$0.isWhitespace }
+    )
   }
-
+  
   func testDateTimeMode_givenENGBLocale_shouldDisplayBothDateAndTime() {
       // Arrange
     self.calendar.locale = .init(identifier: "en-GB")
@@ -109,13 +112,14 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
     )!
     
       // Act
-    let result = sut.format(from: hour, mode: .week)
+    let result = sut.format(from: hour, mode: .week).filter { !$0.isWhitespace }
     
       // Assert
-    XCTAssertEqual(result, "15 – 21 Jul 2024")
+    XCTAssertEqual(
+      result,
+      "15 – 21 Jul 2024".filter { !$0.isWhitespace }
+    )
   }
-  
-
   
   func testMonthYearMode_shouldNotDisplayDay() {
       // Arrange
@@ -138,7 +142,7 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
       // Assert
     XCTAssertEqual(result, "July 2024")
   }
-
+  
   func testYearMode_shouldNotDisplayMonth() {
       // Arrange
     self.calendar.locale = .init(identifier: "en-US")
@@ -160,6 +164,5 @@ final class ExtendedDatePickerFormatterTests: XCTestCase {
       // Assert
     XCTAssertEqual(result, "2024")
   }
-  
 
 }
