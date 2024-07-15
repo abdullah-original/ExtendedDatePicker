@@ -1,6 +1,6 @@
 import Foundation
 
-public class ExtendedDatePickerFormatter {
+final class ExtendedDatePickerFormatter {
   private let dateFormatter: DateFormatter
   private let dateIntervalFormatter: DateIntervalFormatter
   private let calendar: Calendar
