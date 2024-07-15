@@ -43,18 +43,19 @@ final class ExtendedDatePickerFormatter {
       return dateFormatter.string(from: date)
     }
     
-    dateFormatter.dateStyle = switch mode {
-    case .date, .dateTime:
-        .long
+    switch mode {
+    case .hour:
+      dateFormatter.timeStyle = .short
+      dateFormatter.dateStyle = .none
+    case .date:
+      dateFormatter.timeStyle = .none
+      dateFormatter.dateStyle = .long
+    case .dateTime:
+      dateFormatter.timeStyle = .short
+      dateFormatter.dateStyle = .long
     default:
-        .none
-    }
-
-    dateFormatter.timeStyle = switch mode {
-    case .hour, .dateTime:
-        .short
-    default:
-        .none
+      dateFormatter.timeStyle = .none
+      dateFormatter.dateStyle = .none
     }
 
     return dateFormatter.string(from: date)
