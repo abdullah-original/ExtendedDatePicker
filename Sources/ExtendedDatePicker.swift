@@ -3,6 +3,10 @@ import SwiftUI
 
 public struct ExtendedDatePicker: View {
   @State private var isPickerPresented = false
+  
+  public var dateFormatted: String {
+    model.formattedDate(for: model.selectedDate)
+  }
 
   @ObservedObject private var model: ExtendedDatePickerModel
   private let options: ExtendedDatePickerOptions
@@ -75,7 +79,7 @@ private extension ExtendedDatePicker {
         if let header = options.header {
           header(model.selectedDate)
         } else {
-          Text(model.formattedDate(for: model.selectedDate))
+          Text(dateFormatted)
         }
       }
       .contentShape(Rectangle())
