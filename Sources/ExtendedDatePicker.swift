@@ -62,9 +62,7 @@ private extension ExtendedDatePicker {
   func header() -> some View {
     HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
       if shouldShowButtons {
-        Button {
-          model.didPressBack()
-        } label: {
+        Button(action: model.didPressBack) {
           options.backSymbol
         }
         .disabled(!model.isBackButtonEnabled)
@@ -92,9 +90,7 @@ private extension ExtendedDatePicker {
       }
       
       if shouldShowButtons {
-        Button {
-          model.didPressForward()
-        } label: {
+        Button(action: model.didPressForward) {
           options.forwardSymbol
         }
         .disabled(!model.isForwardButtonEnabled)
