@@ -36,6 +36,8 @@ public struct ExtendedDatePicker: View {
             #if os(iOS)
             .datePickerStyle(.wheel)
             .pickerStyle(.wheel)
+            #else
+            .datePickerStyle(.graphical)
             #endif
         }
     } else {
