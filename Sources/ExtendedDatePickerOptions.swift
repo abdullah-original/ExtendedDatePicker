@@ -1,14 +1,14 @@
 import Foundation
 import SwiftUI
 
-/// shouldUseWheelStyleDatePicker: only valid for iOS 16.4, macOS 13.3 etc. and above.
 public struct ExtendedDatePickerOptions {
   let backSymbol: Image
   let forwardSymbol: Image
-  // Push forward and back symbols to the edge.
+  /// Push forward and back symbols to the edge.
   let header: ((Date) -> AnyView)?
-  // Provide .infinity to push symbols to the edge
+  /// Provide .infinity to push symbols to the edge
   let spacing: CGFloat?
+  /// Only valid for iOS 16.4 and above. Ignored for macOS.
   let shouldUseWheelStyleDatePicker: Bool
   
   public init(

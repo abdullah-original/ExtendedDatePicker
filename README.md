@@ -1,6 +1,6 @@
 # ExtendedDatePicker
 
-`DatePicker` from SwiftUI only has two modes (`date`, and `hourAndMinute`) which for many cases is not sufficient. Often you need to switch between even more modes. ExtendedDatePicker solves this problem by providing extra modes that SwiftUI doesn't provide out of the box.
+`DatePicker` from SwiftUI only has two modes (`date`, and `hourAndMinute`) which for many cases is not sufficient. Often you need to switch between even more modes. ExtendedDatePicker supports a bigget set of modes, so that you can spend your time on what matters the most - building useful experiencees for your users. 
 
 | Hour | Date |  DateTime | Week |  MonthYear| Year| 
 | - | - | - | - | - | - |
