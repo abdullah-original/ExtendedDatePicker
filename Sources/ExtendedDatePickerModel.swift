@@ -30,9 +30,10 @@ final class ExtendedDatePickerModel: ObservableObject {
     } else if mode == .week {
       self.customDatePickerRange = weekOptions()
     } else if mode == .hour {
-      guard calendar.isDate(dateRange.lowerBound, inSameDayAs: dateRange.upperBound) else {
-        preconditionFailure("dateRange lowerBound and upperBound must be in the same day for .hour mode.")
-      }
+      precondition(
+        calendar.isDate(dateRange.lowerBound, inSameDayAs: dateRange.upperBound),
+        "dateRange lowerBound and upperBound must be in the same day for .hour mode."
+      )
       
       self.customDatePickerRange = hourOptions()
     }
