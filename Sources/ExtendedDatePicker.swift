@@ -53,23 +53,13 @@ public struct ExtendedDatePicker: View {
 // MARK: - Private
 private extension ExtendedDatePicker {
   
-  var shouldShowButtons: Bool {
-    #if os(iOS)
-    return true
-    #else
-    return false
-    #endif
-  }
-  
   func header() -> some View {
     HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
-      if shouldShowButtons {
-        Button(action: model.didPressBack) {
-          options.backSymbol
-        }
-        .disabled(!model.isBackButtonEnabled)
-        .contentShape(Circle())
+      Button(action: model.didPressBack) {
+        options.backSymbol
       }
+      .disabled(!model.isBackButtonEnabled)
+      .contentShape(Circle())
       
       if options.spacing == .infinity {
         Spacer()
@@ -91,13 +81,11 @@ private extension ExtendedDatePicker {
         Spacer()
       }
       
-      if shouldShowButtons {
-        Button(action: model.didPressForward) {
-          options.forwardSymbol
-        }
-        .disabled(!model.isForwardButtonEnabled)
-        .contentShape(Circle())
+      Button(action: model.didPressForward) {
+        options.forwardSymbol
       }
+      .disabled(!model.isForwardButtonEnabled)
+      .contentShape(Circle())
     }
     .onAppear {
       model.viewDidAppear()
@@ -165,5 +153,6 @@ fileprivate struct ExtendedDatePickerPreview: View {
 @available(iOS 17, macOS 14, macCatalyst 17, *)
 #Preview {
   ExtendedDatePickerPreview()
+    .frame(width: 500, height: 500)
 }
 #endif
