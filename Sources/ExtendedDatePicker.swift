@@ -39,7 +39,7 @@ public struct ExtendedDatePicker: View {
             #endif
         }
     } else if model.displayStyle(shouldUsePopover: options.shouldUseWheelStyleDatePicker) == .nativeLabel {
-      nativeLabelStyleHeader()
+      datePicker()
     } else {
       header()
         .overlay(
@@ -52,21 +52,6 @@ public struct ExtendedDatePicker: View {
 
 // MARK: - Private
 private extension ExtendedDatePicker {
-  
-  func nativeLabelStyleHeader() -> some View {
-    HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
-      if options.spacing == .infinity {
-        Spacer()
-      }
-
-      datePicker()
-      
-      if options.spacing == .infinity {
-        Spacer()
-      }
-    }
-  }
-  
   func header() -> some View {
     HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
       backButton()
