@@ -28,7 +28,7 @@ public struct ExtendedDatePicker: View {
   }
   
   public var body: some View {
-    if options.shouldUseWheelStyleDatePicker, #available(iOS 16.4, macCatalyst 16.4, macOS 13.3, *) {
+    if model.displayStyle(shouldUsePopover: options.shouldUseWheelStyleDatePicker) == .popover, #available(iOS 16.4, macCatalyst 16.4, macOS 13.3, *) {
       header()
         .popover(isPresented: $isPickerPresented) {
           datePicker()
@@ -36,10 +36,10 @@ public struct ExtendedDatePicker: View {
             #if os(iOS)
             .datePickerStyle(.wheel)
             .pickerStyle(.wheel)
-            #else
-            .datePickerStyle(.graphical)
             #endif
         }
+    } else if model.displayStyle(shouldUsePopover: options.shouldUseWheelStyleDatePicker) == .nativeLabel {
+      datePicker()
     } else {
       header()
         .overlay(
@@ -125,13 +125,13 @@ fileprivate struct ExtendedDatePickerPreview: View {
   
   let calendar: Calendar = {
     var tempCal = Calendar.current
-    tempCal.timeZone = .init(abbreviation: "CET")!
+    tempCal.timeZone = .init(abbreviation: "GMT")!
     tempCal.locale = .init(identifier: "en-GB")
     return tempCal
   }()
   
   let range = Date()...(Calendar.current.date(
-    byAdding: .day,
+    byAdding: .minute,
     value: 22,
     to: .now
   ) ?? .now)
@@ -142,7 +142,8 @@ fileprivate struct ExtendedDatePickerPreview: View {
       selectedDate: $selectedDate,
       dateRange: range,
       mode: .week,
-      calendar: self.calendar
+      calendar: self.calendar,
+      options: .init(shouldUseWheelStyleDatePicker: false)
     )
     .onChange(of: selectedDate, initial: true) {
       print(selectedDate)
@@ -156,3 +157,5 @@ fileprivate struct ExtendedDatePickerPreview: View {
     .frame(width: 500, height: 500)
 }
 #endif
+
+

@@ -8,7 +8,7 @@ public struct ExtendedDatePickerOptions {
   let header: ((Date) -> AnyView)?
   /// Provide .infinity to push symbols to the edge
   let spacing: CGFloat?
-  /// Only valid for iOS 16.4 and above. Ignored for macOS.
+  /// Only valid for iOS 16.4  etc. and above. Ignored for macOS.
   let shouldUseWheelStyleDatePicker: Bool
   
   public init(
@@ -24,4 +24,10 @@ public struct ExtendedDatePickerOptions {
     self.spacing = spacing
     self.shouldUseWheelStyleDatePicker = shouldUseWheelStyleDatePicker
   }
+}
+
+enum DisplayStyle {
+  case popover
+  case nativeLabel
+  case overlay
 }

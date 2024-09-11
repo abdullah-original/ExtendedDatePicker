@@ -38,7 +38,28 @@ final class ExtendedDatePickerModel: ObservableObject {
       self.customDatePickerRange = hourOptions()
     }
   }
-  
+
+  func displayStyle(shouldUsePopover: Bool) -> DisplayStyle {
+    switch (BuildTarget.current, shouldUsePopover) {
+    case (.ios, true):
+      return .popover
+    case (.ios, false):
+      return .overlay
+    case (.mac, _), (.macCatalyst, false):
+      if [.date, .dateTime].contains(mode) {
+        return .nativeLabel
+      } else {
+        return .overlay
+      }
+    case (.macCatalyst, true):
+      if #available(iOS 16.4, macCatalyst 16.4, *) {
+        return .popover
+      } else {
+        return displayStyle(shouldUsePopover: false)
+      }
+    }
+  }
+
   func viewDidAppear() {
     guard !viewHasAppeared else { return }
     if let first = customDatePickerRange.keys.sorted(by: <).first {
