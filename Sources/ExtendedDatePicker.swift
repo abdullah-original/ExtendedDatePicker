@@ -39,7 +39,7 @@ public struct ExtendedDatePicker: View {
             #endif
         }
     } else if model.displayStyle(shouldUsePopover: options.shouldUseWheelStyleDatePicker) == .nativeLabel {
-      datePicker()
+      nativeLabelStyleHeader()
     } else {
       header()
         .overlay(
@@ -53,13 +53,23 @@ public struct ExtendedDatePicker: View {
 // MARK: - Private
 private extension ExtendedDatePicker {
   
+  func nativeLabelStyleHeader() -> some View {
+    HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
+      if options.spacing == .infinity {
+        Spacer()
+      }
+
+      datePicker()
+      
+      if options.spacing == .infinity {
+        Spacer()
+      }
+    }
+  }
+  
   func header() -> some View {
     HStack(spacing: options.spacing == .infinity ? .zero : options.spacing) {
-      Button(action: model.didPressBack) {
-        options.backSymbol
-      }
-      .disabled(!model.isBackButtonEnabled)
-      .contentShape(Circle())
+      backButton()
       
       if options.spacing == .infinity {
         Spacer()
@@ -81,11 +91,7 @@ private extension ExtendedDatePicker {
         Spacer()
       }
       
-      Button(action: model.didPressForward) {
-        options.forwardSymbol
-      }
-      .disabled(!model.isForwardButtonEnabled)
-      .contentShape(Circle())
+      forwardButton()
     }
     .onAppear {
       model.viewDidAppear()
@@ -115,6 +121,22 @@ private extension ExtendedDatePicker {
     .environment(\.timeZone, model.calendar.timeZone)
     .environment(\.locale, model.calendar.locale ?? .current)
   }
+  
+  func backButton() -> some View {
+    Button(action: model.didPressBack) {
+      options.backSymbol
+    }
+    .disabled(!model.isBackButtonEnabled)
+    .contentShape(Circle())
+  }
+  
+  func forwardButton() -> some View {
+    Button(action: model.didPressForward) {
+      options.forwardSymbol
+    }
+    .disabled(!model.isForwardButtonEnabled)
+    .contentShape(Circle())
+  }
 }
 
 // MARK: - Preview
@@ -141,7 +163,7 @@ fileprivate struct ExtendedDatePickerPreview: View {
     ExtendedDatePicker(
       selectedDate: $selectedDate,
       dateRange: range,
-      mode: .week,
+      mode: .date,
       calendar: self.calendar,
       options: .init(shouldUseWheelStyleDatePicker: false)
     )
