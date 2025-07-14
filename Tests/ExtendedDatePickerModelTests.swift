@@ -1,7 +1,8 @@
 @testable import ExtendedDatePicker
 import XCTest
 
-final class ExtendedDatePickerModelTests: XCTestCase {
+@MainActor
+final class ExtendedDatePickerModelTests: XCTestCase, Sendable {
   
   private var sut: ExtendedDatePickerModel!
   private var selectedDate: Date!
@@ -9,8 +10,8 @@ final class ExtendedDatePickerModelTests: XCTestCase {
   private var calendar: Calendar!
   private var components: DateMode!
   
-  override func setUp() {
-    super.setUp()
+  override func setUp() async throws {
+    try await super.setUp()
     calendar = .current
     calendar.locale = .init(identifier: "en-GB")
     
