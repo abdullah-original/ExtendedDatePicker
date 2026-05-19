@@ -4,7 +4,7 @@ import XCTest
 final class ExtendedDatePickerFormatterTests: XCTestCase {
     
     private var sut: ExtendedDatePickerFormatter!
-    private var calendar: Calendar = .current
+    private var calendar: Calendar = .init(identifier: .gregorian)
     
     func testHourMode_shouldOnlyDisplayHour() {
         // Arrange

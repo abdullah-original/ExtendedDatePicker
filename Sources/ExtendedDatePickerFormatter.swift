@@ -8,7 +8,7 @@ final class ExtendedDatePickerFormatter {
     init(
         dateFormatter: DateFormatter = .init(), 
         dateIntervalFormatter: DateIntervalFormatter = .init(),
-        calendar: Calendar = .current
+        calendar: Calendar
     ) {
         self.calendar = calendar
         

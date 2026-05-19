@@ -15,7 +15,7 @@ public struct ExtendedDatePicker: View {
         selectedDate: Binding<Date>,
         dateRange: ClosedRange<Date>,
         mode: DateMode = .date,
-        calendar: Calendar = .current,
+        calendar: Calendar = .init(identifier: .gregorian),
         options: ExtendedDatePickerOptions = .init()
     ) {
         self.options = options
