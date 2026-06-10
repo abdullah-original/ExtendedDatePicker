@@ -1,6 +1,6 @@
 import Foundation
 
-final class ExtendedDatePickerFormatter {
+final class ExtendedDatePickerFormatter: Sendable {
     private let dateFormatter: DateFormatter
     private let dateIntervalFormatter: DateIntervalFormatter
     private let calendar: Calendar
